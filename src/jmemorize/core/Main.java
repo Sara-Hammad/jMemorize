@@ -57,6 +57,7 @@ import jmemorize.util.RecentItems;
 public class Main extends Observable implements LearnSessionProvider, 
     LessonProvider, CategoryObserver
 {
+    // to test
     public interface ProgramEndObserver
     {
         /**

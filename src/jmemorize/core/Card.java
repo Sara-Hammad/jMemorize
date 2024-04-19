@@ -23,6 +23,7 @@ import java.util.List;
 
 import jmemorize.core.CardSide.CardSideObserver;
 
+
 /**
  * A flash card that has a front/flip side and can be learned.
  * 
@@ -33,7 +34,8 @@ public class Card implements Events, Cloneable
 {
     public static final long    ONE_DAY     = 1000 * 60 * 60 * 24;
     public static final boolean CLONE_DATES = Main.isDevel();
-
+    // just for test
+    int x=0;
     private Category m_category;
     private int      m_level;
 
