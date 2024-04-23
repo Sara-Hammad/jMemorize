@@ -49,10 +49,17 @@ import javax.swing.text.StyledDocument;
  * 
  * @author djemili
  */
-public class FormattedText implements Cloneable
-{
-    public class ParseException extends Exception
-    {
+//Renamed the m_formatted & m_unformatted to mFormatted & mUnformatted
+//Removed the Cloneable implementation and made the copy constructor
+public class FormattedText {
+    //Copy constructor & constructor
+    public FormattedText(FormattedText other) {
+        this.mFormattedText = other.mFormattedText;
+        this.mUnformattedText = other.mUnformattedText;
+    }
+    public FormattedText() {}
+    //Made Static
+    public static class ParseException extends Exception {
         public ParseException(String message)
         {
             super(message);
@@ -73,26 +80,20 @@ public class FormattedText implements Cloneable
     private static final Pattern TEXT_PATTERN = Pattern.compile(
         "(.*?)<(/?(b|i|u|sub|sup)?)>", Pattern.DOTALL);
     
-//    private static final Pattern IMG_PATTERN = Pattern.compile(
-//        "<img id=\"(.*?)\"/>", Pattern.DOTALL);
-    
     private static final String CONTENT_ELEMENT_NAME = "content";
     
-    private String                     m_formattedText;
-    private String                     m_unformattedText;
+    private String mFormattedText;
+    private String mUnformattedText;
+    private static final Map<String, Object> stylesMap = new HashMap<>();
 
-    private static Map<String, Object> stylesMap = new HashMap<String, Object>();
-    
-    static
-    {
+    static {
         setupStylesMap();
     }
-    
     public static FormattedText formatted(String formatted)
     {
         FormattedText text = new FormattedText();
-        text.m_formattedText = formatted;
-        text.m_unformattedText = unescape(formatted.replaceAll(TAGS, "").replaceAll("<img .*?/>", ""));
+        text.mFormattedText = formatted;
+        text.mUnformattedText = unescape(formatted.replaceAll(TAGS, "").replaceAll("<img .*?/>", ""));
         
         return text;
     }
@@ -119,8 +120,8 @@ public class FormattedText implements Cloneable
     public static FormattedText unformatted(String unformatted)
     {
         FormattedText text = new FormattedText();
-        text.m_formattedText = unformatted;
-        text.m_unformattedText = unformatted;
+        text.mFormattedText = unformatted;
+        text.mUnformattedText = unformatted;
         
         return text;
     }
@@ -146,16 +147,15 @@ public class FormattedText implements Cloneable
     
     public String getFormatted()
     {
-        return m_formattedText;
+        return mFormattedText;
     }
 
     public String getUnformatted()
     {
-        return m_unformattedText;
+        return mUnformattedText;
     }
-    
-    // TODO rename to toStyledDocument
-    public StyledDocument getDocument()
+
+    public StyledDocument toStyledDocument()
     {
         DefaultStyledDocument doc = new DefaultStyledDocument();
         doc.setCharacterAttributes(0, doc.getLength() + 1, // HACK 
@@ -163,7 +163,7 @@ public class FormattedText implements Cloneable
         
         try
         {
-            decode(doc, m_formattedText, 0);
+            decode(doc, mFormattedText, 0);
         } 
         catch (Exception e)
         {
@@ -177,7 +177,7 @@ public class FormattedText implements Cloneable
     {
         try
         {
-            decode(doc, m_formattedText, offset);
+            decode(doc, mFormattedText, offset);
         } 
         catch (Exception e)
         {
@@ -190,46 +190,29 @@ public class FormattedText implements Cloneable
      */
     public String toString()
     {
-        return m_unformattedText;
+        return mUnformattedText;
     }
     
     /* (non-Javadoc)
      * @see java.lang.Object#clone()
      */
-    public Object clone()
-    {
-        try
-        {
-            return super.clone();
-        }
-        catch (CloneNotSupportedException e) 
-        {
-            assert false;
-        }
-        
-        return null;
-    }
+
 
     /* (non-Javadoc)
      * @see java.lang.Object#equals(java.lang.Object)
      */
-    public boolean equals(Object obj)
-    {
-        if (obj instanceof FormattedText)
-        {
-            FormattedText other = (FormattedText)obj;
-            return m_formattedText.equals(other.m_formattedText);
+    public boolean equals(Object obj) {
+        if (obj instanceof FormattedText other) {
+            return mFormattedText.equals(other.mFormattedText);
         }
-        
         return false;
     }
-    
     /* (non-Javadoc)
      * @see java.lang.Object#hashCode()
      */
     public int hashCode()
     {
-        return m_formattedText.hashCode();
+        return mFormattedText.hashCode();
     }
     
     private static String removeRedundantTags(String formattedText)
@@ -238,109 +221,67 @@ public class FormattedText implements Cloneable
          * StyledDocument merges styles in certain situations. To avoid that
          * this results in getting a different encoding after decoding to a
          * StyledDocument and back to an encoding again, we remove redundant
-         * tags by ourself.
+         * tags by ourselves.
          */
-        for (String key : stylesMap.keySet())
-        {
-            StringBuffer sb = new StringBuffer();
-            sb.append("</").append(key).append("><").append(key).append(">");
-            
-            formattedText = formattedText.replaceAll(sb.toString(), "");
+        for (String key : stylesMap.keySet()) {
+            formattedText = formattedText.replaceAll("</" + key + "><" + key + ">", "");
         }
-        
         return formattedText;
     }
 
-    private static String getFormattedText(Element e, int startSelection, 
-        int endSelection)
-    {
-        StringBuffer sb = new StringBuffer();
-        if (e.getName().equals(CONTENT_ELEMENT_NAME))
-        {
+    private static String getFormattedText(Element e,
+                                           int startSelection,
+                                           int endSelection) {
+        StringBuilder sb = new StringBuilder();
+        if (e.getName().equals(CONTENT_ELEMENT_NAME)) {
             Document doc = e.getDocument();
-            
+
             int start = e.getStartOffset();
             int end = Math.min(e.getEndOffset(), doc.getLength());
-            
+
             if (start > endSelection || end < startSelection)
                 return sb.toString();
-            
-            try
-            {
+
+            try {
                 start = Math.max(start, startSelection);
                 end = Math.min(end, endSelection);
-                
+
                 String text = doc.getText(start, end - start);
                 sb.append(escape(text));
-            } 
-            catch (BadLocationException e1)
-            {
+            } catch (BadLocationException e1) {
                 e1.printStackTrace();
                 Main.logThrowable("Error formatting text", e1);
             }
-        } 
-//        else if (e.getName().equals(StyleConstants.ParagraphConstants.ComponentElementName))
-//        {
-//            AttributeSet attr = e.getAttributes();
-//            JLabel label = (JLabel)attr.getAttribute(
-//                StyleConstants.ParagraphConstants.ComponentAttribute);
-//            
-//            ImageIcon icon = (ImageIcon)label.getIcon();
-//            String description = icon.getDescription();
-//            
-//            try
-//            {
-//                String id = "";
-//                if (description.startsWith(ImageRepository.IMG_ID_PREFIX))
-//                {
-//                    id = description.substring(2);
-//                }
-//                else
-//                {
-//                    File file = new File(description);
-//                    FileInputStream in = new FileInputStream(file);
-//                    id = ImageRepository.getInstance().addImage(in, file.getName());
-//                }
-//                
-//                sb.insert(0, "<img id=\""+ id +"\"/>");
-//            }
-//            catch (IOException e1)
-//            {
-//                e1.printStackTrace();
-//                Main.logThrowable("Error formatting image", e1);
-//            }
-//        }
-        else
-        {
+        } else {
             for (int i = 0; i < e.getElementCount(); i++)
             {
                 sb.append(getFormattedText(e.getElement(i), 
                     startSelection, endSelection));
             }
         }
-        
-        for (String name : stylesMap.keySet())
-        {
-            Object styleId = stylesMap.get(name);
-            
-            if (hasStyle(e.getAttributes(), styleId))
-            {
-                sb.insert(0, "<"+name+">");
-                sb.append("</"+name+">");
+
+        for (Map.Entry<String, Object> entry : stylesMap.entrySet()) {
+            String name = entry.getKey();
+            Object styleId = entry.getValue();
+
+            if (hasStyle(e.getAttributes(), styleId)) {
+                sb.insert(0, "<" + name + ">");
+                sb.append("</" + name + ">");
             }
         }
+
         
         return sb.toString();
     }
     
     private static String escape(String text)
     {
-        return text.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+        return text.replace("<", "&lt;").replace(">", "&gt;");
     }
     
     private static String unescape(String text)
     {
-        return text.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
+        return text.replace("&lt;", "<").replace("&gt;", ">");
     }
 
     private static void setupStylesMap()
@@ -353,25 +294,14 @@ public class FormattedText implements Cloneable
     }
     
     private void decode(StyledDocument doc, String text, int offset) 
-        throws BadLocationException, ParseException
-    {
-        StringBuffer sb = new StringBuffer(text);
-        
-//        Map<Integer, ImageIcon> images = decodeImages(doc, sb);
-        
-        /*
-         * problem we need to decode the images first and remove the strings
-         * from the overall string, because pattern searching takes too long.
-         * this is problematic though, because decodeImages expects to be called
-         * afterwards.
-         */
+        throws BadLocationException {
+        StringBuilder sb = new StringBuilder(text);
         
         Matcher m = TEXT_PATTERN.matcher(sb);
         int end = 0;
         
         SimpleAttributeSet attr = new SimpleAttributeSet();
-        while (m.find())
-        {
+        while (m.find()) {
             String pretext = m.group(1);
             String tag = m.group(2);
             
@@ -380,8 +310,7 @@ public class FormattedText implements Cloneable
             offset += unescapedPretext.length();
             
             boolean style = true;
-            if (tag.startsWith("/"))
-            {
+            if (tag.startsWith("/")) {
                 tag = tag.substring(1);
                 style = false;
             }
@@ -394,41 +323,7 @@ public class FormattedText implements Cloneable
         
         String restText = unescape(sb.substring(end));
         doc.insertString(offset, restText, new SimpleAttributeSet());
-        
-//        for (Entry<Integer, ImageIcon> entry : images.entrySet())
-//        {            
-//            ImageIcon icon = entry.getValue();
-//            Integer iconOffset = entry.getKey();
-//            insertImage(doc, icon, iconOffset);
-//        }
     }
-
-    // TODO move this back into decode
-//    private Map<Integer, ImageIcon> decodeImages(StyledDocument doc, StringBuffer text) 
-//        throws BadLocationException, ParseException
-//    {
-//        Map<Integer, ImageIcon> images = new HashMap<Integer, ImageIcon>();
-//        
-//        Matcher m = IMG_PATTERN.matcher(text);
-//
-//        while (m.find())
-//        {
-//            String id = m.group(1);
-//            
-//            int offset = m.start(0);
-//            text.replace(offset, m.end(0), "");
-//            
-//            ImageIcon img = ImageRepository.getInstance().getImage(id);
-//            
-//            if (img == null)
-//                throw new ParseException("Image with id "+id+" wasn't found in image repository.");
-//            
-//            images.put(offset, img);
-//        }
-//        
-//        return images;
-//    }
-    
     private static boolean hasStyle(AttributeSet attr, Object styleId)
     {
         Boolean style = (Boolean)attr.getAttribute(styleId);

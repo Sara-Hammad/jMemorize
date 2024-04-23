@@ -1,0 +1,78 @@
+
+J
+java:S3740|"/Provide the parametrized type for this generic.(İüü†ùÿÿÿÿ
+J
+java:S3740|"/Provide the parametrized type for this generic.(İüü†ùÿÿÿÿ
+u
+java:S2293è"YReplace the type specification in this constructor call with the diamond operator ("<>").(á¬ı¥üÿÿÿÿ
+?
+java:S1604"(Make this anonymous inner class a lambda(ì³ã²
+D
+java:S1604ó"(Make this anonymous inner class a lambda(ÅŸÎúÿÿÿÿ
+?
+java:S1604 "(Make this anonymous inner class a lambda(ÎÿêÍ
+?
+java:S1604Ä"(Make this anonymous inner class a lambda(ÿ©äÒ
+?
+java:S1604é"(Make this anonymous inner class a lambda(¢¹¨û
+?
+java:S1604—"(Make this anonymous inner class a lambda(‹€­è
+?
+java:S1604º"(Make this anonymous inner class a lambda(ø®‡
+w	java:S116A"]Rename this field "m_cardLimitSpinner" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ìõ¤úÿÿÿÿ
+w	java:S116C"]Rename this field "m_timeLimitSpinner" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(±ÿâ¹üÿÿÿÿ
+w	java:S116E"]Rename this field "m_updatingSpinners" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(•·È—şÿÿÿÿ
+w	java:S116H"]Rename this field "m_categoryComboBox" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ƒìûÿÿÿÿ
+p	java:S116I"[Rename this field "m_allCardsButton" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(´’¿¿
+{	java:S116K"aRename this field "m_unlearnedCardsButton" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ş£ôíúÿÿÿÿ
+y	java:S116M"_Rename this field "m_expiredCardsButton" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ß›€øÿÿÿÿ
+z	java:S116O"`Rename this field "m_selectedCardsButton" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¡ÇÅÅÿÿÿÿÿ
+x	java:S116S"^Rename this field "m_timeLimitCheckBox" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Š‘œ»şÿÿÿÿ
+s	java:S116U"^Rename this field "m_cardLimitCheckBox" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(™Æ
+y	java:S116W"_Rename this field "m_dontRetestCheckBox" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ØüÓ®úÿÿÿÿ
+x	java:S116["^Rename this field "m_sidesNormalButton" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¬Ğ©³ùÿÿÿÿ
+y	java:S116]"_Rename this field "m_sidesFlippedButton" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(› ½áÿÿÿÿÿ
+r	java:S116_"^Rename this field "m_sidesRandomButton" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(éîõ7
+v	java:S116a"\Rename this field "m_sidesBothButton" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÎËŠ®üÿÿÿÿ
+y	java:S116j"eRename this field "m_frontChecksAmountSpinner" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(…Œè"
+y	java:S116l"dRename this field "m_backChecksAmountSpinner" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚½¼
+x	java:S116p"cRename this field "m_categoryGroupsCheckBox" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.( îÌó
+z	java:S116r"eRename this field "m_categoryOrderFixedButton" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ú³Ù
+{	java:S116t"fRename this field "m_categoryOrderRandomButton" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(²‰¶
+t	java:S116v"_Rename this field "m_shuffleRatioSlider" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ˆƒ¼¿
+n	java:S116y"YRename this field "m_scheduleDays" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¬àûè
+o	java:S116z"ZRename this field "m_scheduleHours" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ºúÛ…
+q	java:S116{"\Rename this field "m_scheduleMinutes" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(²ÂÎä
+~	java:S116|"dRename this field "m_schedulePresetsComboBox" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(İüü†ùÿÿÿÿ
+}	java:S116~"hRename this field "m_fixedExpirationTimeCheckBox" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ü®Ó¤
+}	java:S116"gRename this field "m_fixedExpirationTimeSpinner" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(äß‡‹
+k	java:S116„"URename this field "m_settings" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ó»ãå
+x	java:S116…"]Rename this field "m_hasSelectedCards" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ñ©–»ıÿÿÿÿ
+r
+java:S1149è"VReplace the synchronized class "Hashtable" by an unsynchronized one such as "HashMap".(á¬ı¥üÿÿÿÿ
+_
+java:S5738Ì"HRemove this call to a deprecated method, it has been marked for removal.(¥œ€®
+_
+java:S5738Í"HRemove this call to a deprecated method, it has been marked for removal.(ÿó
+d
+java:S5738ä"HRemove this call to a deprecated method, it has been marked for removal.(Õ”¨Õûÿÿÿÿ
+d
+java:S5738å"HRemove this call to a deprecated method, it has been marked for removal.(ûØ©ùÿÿÿÿ
+[
+java:S3358—"DExtract this nested ternary operation into an independent statement.(å¤î¶
+`
+java:S3358˜"DExtract this nested ternary operation into an independent statement.(Í·Ç«şÿÿÿÿ
+N
+java:S1135ü"2Complete the task associated to this TODO comment.(³°¼›úÿÿÿÿ
+8
+java:S2129˜"!Remove this "Integer" constructor(¡ÖÁá
+_
+java:S5738˜"HRemove this call to a deprecated method, it has been marked for removal.(¡ÖÁá
+8
+java:S2129™"!Remove this "Integer" constructor(üÂî¤
+_
+java:S5738™"HRemove this call to a deprecated method, it has been marked for removal.(üÂî¤
+8
+java:S2129š"!Remove this "Integer" constructor(ï¯óÏ
+_
+java:S5738š"HRemove this call to a deprecated method, it has been marked for removal.(ï¯óÏ

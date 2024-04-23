@@ -1,0 +1,43 @@
+
+q
+java:S1066«"/Merge this if statement with the enclosing one.(àâç©úÿÿÿÿJ$a35e6203-c21e-4679-a749-cfce1b3a021d
+•	java:S116Ï"ZRename this field "m_cardSidePanel" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸ÜJ$974231fc-a760-45d3-8ecd-07d567ae57b4
+ 
+java:S1149B"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(¨âàøÿÿÿÿJ$d0f5a304-e541-4070-9f99-8083ce9b677a
+	java:S1163"RRename this field "m_cards" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(•²ÀŞJ$325b8cf7-c350-47cb-84d1-08db301075d6
+ 
+java:S1149B"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(¨âàøÿÿÿÿJ$3cd9d8bf-4580-46e0-a937-a74268781497
+	java:S116\"URename this field "m_category" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯™øJ$ef5ec29c-9f38-4516-b537-b11df3605177
+’	java:S116"QRename this field "m_text" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‰ñ¸£ûÿÿÿÿJ$eacf0f1b-e6db-4493-a269-352471935fa2
+‘	java:S116‚"URename this field "m_document" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(°°åÉJ$a68eb400-153b-46bd-9542-792a36233466
+“	java:S116ƒ"RRename this field "m_start" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šíÑ¯üÿÿÿÿJ$4859ae2e-dcae-46c5-9edc-bb0a7bf13231
+‘	java:S116„"PRename this field "m_end" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨¦åûÿÿÿÿJ$8bc1e70d-ea4c-4b6b-85d1-440e6b776f45
+^
+java:S1116Œ"Remove this empty statement.(ÑÏÿ¯şÿÿÿÿJ$370c6115-560f-4438-acd3-bec6b93e7af0
+–	java:S116¦"ZRename this field "m_formattedText" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ô…ĞÜJ$2679d7fa-f80f-4757-9cf0-0baa90a3a85d
+‡
+java:S1124Æ"EReorder the modifiers to comply with the Java Language Specification.(ĞÖš‡ÿÿÿÿÿJ$238939c3-5b06-4c96-88b8-64d5ed8ca682
+‚
+java:S1124É"EReorder the modifiers to comply with the Java Language Specification.(ø¸¥©J$fad40e6d-5bd6-4013-84f0-b820b1766f9c
+‚
+java:S1124Ì"EReorder the modifiers to comply with the Java Language Specification.(á³¤ J$8aa84ce8-4a4f-4cf7-9efd-9e5b3df17970
+|
+java:S1161İ":Add the "@Override" annotation above this method signature(¶…ªúÿÿÿÿJ$818b15a9-08fa-42da-be79-60f96f397ed0
+w
+java:S1161å":Add the "@Override" annotation above this method signature(Ø†íãJ$6607f0b7-e2e1-43e3-8553-c95bb5e128be
+”
+java:S3776†"RRefactor this method to reduce its Cognitive Complexity from 29 to the 15 allowed.(‚¼óèÿÿÿÿÿJ$a2514d28-790f-4889-bea1-4839fb7c028a
+|
+java:S1161†":Add the "@Override" annotation above this method signature(‚¼óèÿÿÿÿÿJ$c2e05066-fda0-4500-a89a-02044ff3f5c6
+
+java:S6201•"KReplace this instanceof check and cast with 'instanceof JTextPane textPane'(ËÅæŞÿÿÿÿÿJ$774b7b9d-1671-43a9-b9c0-5fd708ac35b0
+m
+java:S1874±"+Remove this use of "URL"; it is deprecated.(³¸™şÿÿÿÿJ$8d5f180b-734f-4513-ada7-ca60ab3c406b
+|
+java:S1161ğ":Add the "@Override" annotation above this method signature(ú‡¸¸øÿÿÿÿJ$66cd4adc-1488-4064-9e7c-bc07d2c1d8fc
+
+java:S6201ÿ"KReplace this instanceof check and cast with 'instanceof JTextPane textPane'(×Š˜ÄüÿÿÿÿJ$bc444ca2-0a6b-4b1d-8a9a-8a0900495880
+|
+java:S1161”":Add the "@Override" annotation above this method signature(îúÃ­úÿÿÿÿJ$b96d35aa-ad34-41ae-8947-908989c9f940
+ˆ
+java:S6541†"ÅA "Brain Method" was detected. Refactor it to reduce at least one of the following metrics: LOC from 90 to 64, Complexity from 18 to 14, Nesting Level from 6 to 2, Number of Variables from 18 to 6.(‚¼óèÿÿÿÿÿJ$291c780c-924c-4a0b-9913-47a7f0b142ee

@@ -1,7 +1,7 @@
 /*
  * jMemorize - Learning made easy (and fun) - A Leitner flashcards tool
  * Copyright(C) 2004-2008 Riad Djemili and contributors
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 1, or (at your option)
@@ -37,34 +37,34 @@ public class CardTest extends TestCase
         m_category = new Category("root_category");
         m_card = new Card(new Date(), "test_card","bla");
     }
-    
+
     public void testEditText()
     {
         m_category.addCard(m_card);
         m_card.setSides("test frontside", "test backside");
         m_card.setSides("test frontside2", "test backside2");
-        
+
         CardSide frontSide = m_card.getFrontSide();
         CardSide backSide = m_card.getBackSide();
-        
+
         assertEquals("test frontside2", frontSide.getText().getUnformatted());
         assertEquals("test backside2", backSide.getText().getUnformatted());
     }
-    
+
     public void testAddImage()
     {
         List<String> images = new LinkedList<String>();
         images.add("foo.png");
-        
+
         m_card.getFrontSide().setImages(images);
         assertEquals(images, m_card.getFrontSide().getImages());
-        
+
         List<String> originalImages = new LinkedList<String>();
         originalImages.addAll(images);
-        
+
         images.add("bar.png");
-        assertEquals("image list should not be stored as reference to argument", 
-            originalImages, m_card.getFrontSide().getImages());
+        assertEquals("image list should not be stored as reference to argument",
+                originalImages, m_card.getFrontSide().getImages());
     }
 
     public void testCardClonesBasic()
@@ -72,15 +72,17 @@ public class CardTest extends TestCase
         m_category.addCard(m_card);
         assertEquals(1, m_category.getCards().size());
 
-        Card clonedCard = (Card)m_card.clone();
-        
+        Card clonedCard = new Card(m_card);
+
+
         assertEquals(1, m_category.getCards().size());
         assertEquals(null, clonedCard.getCategory());
     }
 
     public void testCardClonesText()
     {
-        Card clonedCard = (Card)m_card.clone();
+        Card clonedCard = new Card(m_card);
+
         clonedCard.setSides("other front", "other back");
 
         assertEquals("test_card", m_card.getFrontSide().toString());
@@ -89,43 +91,45 @@ public class CardTest extends TestCase
         assertEquals("other front", clonedCard.getFrontSide().toString());
         assertEquals("other back", clonedCard.getBackSide().toString());
     }
-    
+
     public void testCardClonesImages()
     {
         List<String> images = new LinkedList<String>();
         images.add("foo.png");
         m_card.getFrontSide().setImages(images);
-        
-        Card clonedCard = (Card)m_card.clone();
+
+        Card clonedCard = new Card(m_card);
+
         assertEquals(images, clonedCard.getFrontSide().getImages());
-        
+
         List<String> noImages = new LinkedList<String>();
         m_card.getFrontSide().setImages(noImages);
-        
+
         assertEquals("clone should not reference originals image list",
-            images, clonedCard.getFrontSide().getImages());
+                images, clonedCard.getFrontSide().getImages());
     }
-    
+
     public void testCardWithoutProgressClonesImages()
     {
         List<String> images = new LinkedList<String>();
         images.add("foo.png");
         m_card.getFrontSide().setImages(images);
-        
+
         Card clonedCard = (Card)m_card.cloneWithoutProgress();
         assertEquals(images, clonedCard.getFrontSide().getImages());
-        
+
         List<String> noImages = new LinkedList<String>();
         m_card.getFrontSide().setImages(noImages);
-        
+
         assertEquals("clone should not reference originals image list",
-            images, clonedCard.getFrontSide().getImages());
+                images, clonedCard.getFrontSide().getImages());
     }
 
     public void testCardClonesStatss()
     {
         m_category.addCard(m_card);
-        Card clonedCard = (Card)m_card.clone();
+        Card clonedCard = new Card(m_card);
+
 
         assertEquals(m_card.getLevel(), clonedCard.getLevel());
 
@@ -138,7 +142,7 @@ public class CardTest extends TestCase
         assertEquals(m_card.getPassRatio(), clonedCard.getPassRatio());
         assertEquals(m_card.getTestsPassed(), clonedCard.getTestsPassed());
         assertEquals(m_card.getTestsTotal(), clonedCard.getTestsTotal());
-        assertEquals(m_card.getLearnedAmount(true), clonedCard.getLearnedAmount(true));
-        assertEquals(m_card.getLearnedAmount(false), clonedCard.getLearnedAmount(false));
+        assertEquals(m_card.getFrontSide().getLearnedAmount(), clonedCard.getFrontSide().getLearnedAmount());
+        assertEquals(m_card.getBackSide().getLearnedAmount(), clonedCard.getBackSide().getLearnedAmount());
     }
 }

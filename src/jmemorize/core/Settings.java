@@ -39,6 +39,8 @@ import jmemorize.gui.swing.CardFont.FontType;
 import jmemorize.gui.swing.frames.MainFrame;
 import jmemorize.util.PreferencesTool;
 
+import static java.util.List.of;
+
 /**
  * Stores all jMemorize settings by using a preferences node. Use storeXXX to
  * save settings and loadXXX to load them again.
@@ -56,57 +58,59 @@ public class Settings
         public void fontChanged(FontType type, CardFont font);
     }
     
-    // TODO move all user prefs here
-    public final static Preferences PREFS = Main.USER_PREFS;
+
+    public static final Preferences     USER_PREFS              =
+            Preferences.userRoot().node("de/riad/jmemorize");          //$NON-NLS-1$
+    public  static final Preferences PREFS = USER_PREFS;
     
     // observers
-    private static List<CardFontObserver> m_cardFontObservers = 
-        new LinkedList<CardFontObserver>();
+    private static final List<CardFontObserver> cardFontObservers =
+        new LinkedList<>();
     
     // locale keys
-    private final static String LOCALE_LANG = "locale-lang";       //$NON-NLS-1$
-    private final static String LOCALE_COUNTRY = "locale-country"; //$NON-NLS-1$
+    private  static final String LOCALE_LANG = "locale-lang";       //$NON-NLS-1$
+    private  static final String LOCALE_COUNTRY = "locale-country"; //$NON-NLS-1$
 
     // font keys
-    private final static String FONT_FRONT_KEY = "front"; //$NON-NLS-1$
-    private final static String FONT_FLIP_KEY = "flip"; //$NON-NLS-1$
-    private final static String FONT_LEARN_FRONT_KEY = "learn-front"; //$NON-NLS-1$
-    private final static String FONT_LEARN_FLIP_KEY = "learn-flip"; //$NON-NLS-1$
-    private final static String FONT_TABLE_FRONT_KEY = "table-front"; //$NON-NLS-1$
-    private final static String FONT_TABLE_FLIP_KEY = "table-flip"; //$NON-NLS-1$
+    private  static final String FONT_FRONT_KEY = "front"; //$NON-NLS-1$
+    private  static final String FONT_FLIP_KEY = "flip"; //$NON-NLS-1$
+    private  static final String FONT_LEARN_FRONT_KEY = "learn-front"; //$NON-NLS-1$
+    private  static final String FONT_LEARN_FLIP_KEY = "learn-flip"; //$NON-NLS-1$
+    private  static final String FONT_TABLE_FRONT_KEY = "table-front"; //$NON-NLS-1$
+    private  static final String FONT_TABLE_FLIP_KEY = "table-flip"; //$NON-NLS-1$
 
     // strategy keys
-    private final static String LIMIT_CARDS_ENABLED = "limit.cards.enabled"; //$NON-NLS-1$
-    private final static String LIMIT_TIME_ENABLED = "limit.time.enabled"; //$NON-NLS-1$
-    private final static String LIMIT_CARDS = "limit.cards"; //$NON-NLS-1$
-    private final static String LIMIT_TIME = "limit.time"; //$NON-NLS-1$
-    private final static String RETEST_FAILED_CARDS = "retest-failed-cards";   //$NON-NLS-1$
+    private  static final String LIMIT_CARDS_ENABLED = "limit.cards.enabled"; //$NON-NLS-1$
+    private  static final String LIMIT_TIME_ENABLED = "limit.time.enabled"; //$NON-NLS-1$
+    private  static final String LIMIT_CARDS = "limit.cards"; //$NON-NLS-1$
+    private  static final String LIMIT_TIME = "limit.time"; //$NON-NLS-1$
+    private  static final String RETEST_FAILED_CARDS = "retest-failed-cards";   //$NON-NLS-1$
     
-    private final static String SCHEDULE_PRESET = "schedule.preset"; //$NON-NLS-1$
-    private final static String SCHEDULE = "schedule.values"; //$NON-NLS-1$
+    private  static final String SCHEDULE_PRESET = "schedule.preset"; //$NON-NLS-1$
+    private  static final String SCHEDULE = "schedule.values"; //$NON-NLS-1$
     
-    private final static String SCHEDULE_FIXED_EXPIRATION_ENABLED = "schedule.fixed-expiration.enabled"; //$NON-NLS-1$
-    private final static String SCHEDULE_FIXED_EXPIRATION_HOUR = "schedule.fixed-expiration.hour"; //$NON-NLS-1$
-    private final static String SCHEDULE_FIXED_EXPIRATION_MINUTE = "schedule.fixed-expiration.minute";  //$NON-NLS-1$
+    private  static final String SCHEDULE_FIXED_EXPIRATION_ENABLED = "schedule.fixed-expiration.enabled"; //$NON-NLS-1$
+    private  static final String SCHEDULE_FIXED_EXPIRATION_HOUR = "schedule.fixed-expiration.hour"; //$NON-NLS-1$
+    private  static final String SCHEDULE_FIXED_EXPIRATION_MINUTE = "schedule.fixed-expiration.minute";  //$NON-NLS-1$
     
-    private final static String SIDES = "sides";                 //$NON-NLS-1$
-    private final static String SIDES_FRONT_AMOUNT = "sides-front-amount"; //$NON-NLS-1$
-    private final static String SIDES_FLIP_AMOUNT = "sides-flip-amount"; //$NON-NLS-1$
-    private final static String GROUP_BY_CATEGORY = "card-order.group-by-category"; //$NON-NLS-1$
-    private final static String CATEGORY_ORDER = "card-order.group-by-category.order"; //$NON-NLS-1$
-    private final static String SHUFFLE_CARDS = "card-order.shuffle"; //$NON-NLS-1$
+    private static final  String SIDES = "sides";                 //$NON-NLS-1$
+    private  static final String SIDES_FRONT_AMOUNT = "sides-front-amount"; //$NON-NLS-1$
+    private  static final String SIDES_FLIP_AMOUNT = "sides-flip-amount"; //$NON-NLS-1$
+    private  static final String GROUP_BY_CATEGORY = "card-order.group-by-category"; //$NON-NLS-1$
+    private static final String CATEGORY_ORDER = "card-order.group-by-category.order"; //$NON-NLS-1$
+    private  static final String SHUFFLE_CARDS = "card-order.shuffle"; //$NON-NLS-1$
     
     // gui
-    private final static String FRAME_MAXIMIZED = "frame.maximized"; //$NON-NLS-1$
-    private final static String FRAME_POSITION = "frame.position"; //$NON-NLS-1$
-    private final static String FRAME_SIZE = "frame.size"; //$NON-NLS-1$
+    private  static final String FRAME_MAXIMIZED = "frame.maximized"; //$NON-NLS-1$
+    private  static final String FRAME_POSITION = "frame.position"; //$NON-NLS-1$
+    private  static final String FRAME_SIZE = "frame.size"; //$NON-NLS-1$
 
     // etc keys
-    private final static String LAST_DIRECTORY = "last-directory"; //$NON-NLS-1$
-    private final static String SAVE_COMPRESSED = "gzip";          //$NON-NLS-1$
-    private final static String CATEGORY_TREE_WIDTH = "category-tree.width"; //$NON-NLS-1$
-    private final static String CATEGORY_TREE_VISIBLE = "category-tree.visible"; //$NON-NLS-1$
-    private final static String MAIN_DIVIDER_LOCATION = "main-divider.location"; //$NON-NLS-1$
+    private  static final String LAST_DIRECTORY = "last-directory"; //$NON-NLS-1$
+    private  static final String SAVE_COMPRESSED = "gzip";          //$NON-NLS-1$
+    private  static final String CATEGORY_TREE_WIDTH = "category-tree.width"; //$NON-NLS-1$
+    private  static final String CATEGORY_TREE_VISIBLE = "category-tree.visible"; //$NON-NLS-1$
+    private  static final String MAIN_DIVIDER_LOCATION = "main-divider.location"; //$NON-NLS-1$
     
     
     public static void storeLocale(Locale locale)
@@ -119,6 +123,7 @@ public class Settings
      * @return The locale stored in preferences or the default locale if no
      * locale was stored.
      */
+
     public static Locale loadLocale()
     {
         String lang = PREFS.get(LOCALE_LANG, null);
@@ -126,9 +131,9 @@ public class Settings
         {
             return Localization.getDefaultLocale();
         }
-        
+
         String country = PREFS.get(LOCALE_COUNTRY, null);
-        return country != null ? new Locale(lang, country) : new Locale(lang);
+        return country != null ?  Locale.of(lang, country) :  Locale.of(lang);
     }
     
     public static void storeFont(FontType type, CardFont font)
@@ -140,7 +145,7 @@ public class Settings
         PREFS.put(toAlignmentKey(key), font.getAlignment().toString());
         PREFS.putBoolean(toVerticalAlignmentKey(key), font.isVerticallyCentered());
         
-        for (CardFontObserver observer : m_cardFontObservers)
+        for (CardFontObserver observer : cardFontObservers)
         {
             observer.fontChanged(type, font);
         }
@@ -156,17 +161,15 @@ public class Settings
         boolean valign = PREFS.getBoolean(toVerticalAlignmentKey(key), false);
         
         Font font = new Font(name, Font.PLAIN, size);
-        FontAlignment alignment = FontAlignment.LEFT; 
-        try
-        {
+        FontAlignment alignment ;
+
+
             alignment = FontAlignment.valueOf(align);
-        }
-        catch (Exception e) 
-        {
-//            Main.logThrowable("failed to load font alignment.", e);
-        }
+
+
         
         return new CardFont(font, alignment, valign);
+
     }
     
     public static void setCardFont(CardFontObserver observer, boolean flipped, 
@@ -181,7 +184,7 @@ public class Settings
     
     public static void addCardFontObserver(CardFontObserver observer)
     {
-        m_cardFontObservers.add(observer);
+        cardFontObservers.add(observer);
     }
     
     public static void setCardFont(CardFontObserver observer, 
@@ -190,10 +193,10 @@ public class Settings
         setCardFont(observer, false, type1, type2);
     }
     
-    // TODO rename
-    public static void removedCardFontObserver(CardFontObserver observer)
+
+    public static void removeCardFontObserver(CardFontObserver observer)
     {
-        m_cardFontObservers.remove(observer);
+        cardFontObservers.remove(observer);
     }
     
     public static void storeStrategy(LearnSettings strategy)
@@ -226,7 +229,7 @@ public class Settings
      * @return A newly created strategy that got instantiated with all the
      * stored strategy data or with default values.
      */
-    public static LearnSettings loadStrategy(MainFrame frame)
+    public static LearnSettings loadStrategy(MainFrame mFrame)
     {
         LearnSettings settings = new LearnSettings();
         
@@ -284,21 +287,19 @@ public class Settings
         return PREFS.getBoolean(SAVE_COMPRESSED, true);
     }
     
-    // TODO merge storeCategoryTreeWidth and storeCategoryTreeVisible
-    public static void storeCategoryTreeWidth(int width)
+
+    public static void storeCategoryTreeWidth(int width,boolean visible)
     {
         PREFS.putInt(CATEGORY_TREE_WIDTH, width);
+        PREFS.putBoolean(CATEGORY_TREE_VISIBLE, visible);
     }
     
     public static int loadCategoryTreeWidth()
     {
         return PREFS.getInt(CATEGORY_TREE_WIDTH, 150);
     }
-    
-    public static void storeCategoryTreeVisible(boolean visible)
-    {
-        PREFS.putBoolean(CATEGORY_TREE_VISIBLE, visible);
-    }
+
+
     
     public static boolean loadCategoryTreeVisible()
     {

@@ -163,17 +163,17 @@ public class CategoryTest extends TestCase implements CategoryObserver
         Category d = c.addCategoryChild(new Category("d"));
         Category e = c.addCategoryChild(new Category("e"));
         
-        List<Category> list = d.getSubtreeList();
+        List<Category> list = d.getChildCategoriesTree();
         assertEquals(1, list.size());
         assertEquals(d, list.get(0));
         
-        list = c.getSubtreeList();
+        list = c.getChildCategoriesTree();
         assertEquals(3, list.size());
         assertEquals(c, list.get(0));
         assertEquals(d, list.get(1));
         assertEquals(e, list.get(2));
         
-        list = a.getSubtreeList();
+        list = a.getChildCategoriesTree();
         assertEquals(5, list.size());
         assertEquals(a, list.get(0));
         assertEquals(b, list.get(1));

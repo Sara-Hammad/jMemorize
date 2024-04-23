@@ -315,26 +315,25 @@ public class LearnPanel extends JPanel implements SelectionProvider,
         m_cardCounterPanel.setCardsPassed(cardsLearned, cardsPartiallyLearned);
         if (!m_isPartialProgressMode || m_currentCard == null)
             return;
-        
-        int amtLearned = m_currentCard.getLearnedAmount(true) + m_currentCard.getLearnedAmount(false);
+
+        int amtLearned = m_currentCard.getFrontSide().getLearnedAmount() + m_currentCard.getBackSide().getLearnedAmount();
         
         m_currentCardProgressBar.setValue(amtLearned);
         m_currentCardProgressBar.setString(amtLearned + " / " +  //$NON-NLS-1$
             m_currentCardProgressBar.getMaximum());
     }
-    
-    private void updateStatusBar()
-    {
-        if (m_statusBar != null)
-        {
+
+    private void updateStatusBar() {
+        if (m_statusBar != null) {
             Object[] args = {
-                Localization.get(LC.STATUS_LEARNING_CATEGORY),
-                m_session.getCategory().getName(),
-                Localization.get(LC.STATUS_CARDS_LEFT), 
-                new Integer(m_session.getCardsLeft().size())};
-            
-            MessageFormat form = new MessageFormat("{0}: {1}  {2}: {3}"); //$NON-NLS-1$
+                    Localization.get(LC.STATUS_LEARNING_CATEGORY),
+                    m_session.getCategory().getName(),
+                    Localization.get(LC.STATUS_CARDS_LEFT),
+                    m_session.getCardsLeft().size()};
+
+            MessageFormat form = new MessageFormat("{0}: {1}  {2}: {3}");
             m_statusBar.setLeftText(form.format(args));
         }
     }
+
 }

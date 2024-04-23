@@ -1,0 +1,32 @@
+
+
+java:S2293ì"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ãæá8À¥Çäğ1J$3b1599ad-e930-4e79-a7db-b466903e17f3
+
+java:S2293Ï"YReplace the type specification in this constructor call with the diamond operator ("<>").(°ô£8Á¥Çäğ1J$5f91481b-7a30-400e-97a0-7a2994b22742
+
+java:S2293á"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÆğÜÒ8Á¥Çäğ1J$b37bfcb9-1720-42bf-8383-41f97cbd4785
+
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(Àæ²›8Á¥Çäğ1J$51593be1-6510-4ea5-b755-d05ceb5d5795
+œ	java:S135Ğ"YReduce the total number of break and continue statements in this loop to use at most one.(Ä©İ´8Í¥Çäğ1J$9c054d93-60c8-47e1-a0de-424a33589a81
+œ	java:S135Á"YReduce the total number of break and continue statements in this loop to use at most one.(¾ª†È8Í¥Çäğ1J$22121eb8-5b15-42f8-98b8-2cbe6aeb7d82
+}
+java:S1118I":Add a private constructor to hide the implicit public one.(›‚üÔ8˜¦Çäğ1J$fce961dc-7f81-4bb2-9f33-4e85b2dd379b
+
+java:S1124l"EReorder the modifiers to comply with the Java Language Specification.(ÅÚö÷ÿÿÿÿÿ8š¦Çäğ1J$5b39b9e9-c295-4ddb-bbc0-68a6e639b813
+s
+java:S2093ñ"*Change this "try" to a try-with-resources.(ç£êúÿÿÿÿ8Ë¦Çäğ1J$50fc484f-f7c8-4d89-943c-5ceeb553648b
+y
+java:S1133"5Do not forget to remove this deprecated code someday.(œûºÉ8Ì¦Çäğ1J$6cc1349a-95f7-4ec1-8702-d73787ea9366
+k
+java:S1123"'Add the missing @Deprecated annotation.(œûºÉ8Ì¦Çäğ1J$baed398b-6ff5-4e05-aa1d-130c1e05ad64
+~
+java:S1133²"5Do not forget to remove this deprecated code someday.(•ÓÀÿÿÿÿÿ8Ï¦Çäğ1J$27e9f735-1fe1-4baf-acd1-239a360622e0
+p
+java:S1123²"'Add the missing @Deprecated annotation.(•ÓÀÿÿÿÿÿ8Ï¦Çäğ1J$ea0bdbe8-cdce-4125-99db-b55dcd8246b5
+v
+java:S1135ß"2Complete the task associated to this TODO comment.(¿Ê½8Ó¦Çäğ1J$00f1b3e0-822d-414d-a030-cb489bb04338
+~	java:S899ö";Do something with the "boolean" value returned by "delete".(¿ ÛÜ8Õ¦Çäğ1J$fd4baed9-01bc-4456-87cb-0f57debf97ab
+’
+java:S4042ö"NUse "java.nio.file.Files#delete" here for better messages on error conditions.(¿ ÛÜ8Ö¦Çäğ1J$cdd67b20-1f46-4de8-aee2-c955278c198f
+q
+java:S1172Ù"-Remove this unused method parameter "father".(—ß¦Ä8Ş¦Çäğ1J$35139b50-3b2e-43e0-8e32-824950de6294

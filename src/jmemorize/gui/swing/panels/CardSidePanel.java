@@ -319,7 +319,7 @@ public class CardSidePanel extends JPanel
      */
     public Document setText(FormattedText text)
     {
-        StyledDocument doc = text.getDocument();
+        StyledDocument doc = text.toStyledDocument();
         m_textPane.setDocument(doc);
         
         setDocAlignment(doc, m_cardFont);

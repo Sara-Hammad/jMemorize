@@ -1,0 +1,17 @@
+
+š
+java:S2293["YReplace the type specification in this constructor call with the diamond operator ("<>").(ó¼š¡üÿÿÿÿJ$b9da1d47-55c3-4fe4-a6f9-bb68df3f92e0
+™	java:S116U"YRename this field "m_rootCategory" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ğÔ…µÿÿÿÿÿJ$ed470668-8c44-4dfd-9c8f-75530d3a6a40
+š	java:S116V"ZRename this field "m_childCategory" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(›“şëøÿÿÿÿJ$dd6315be-94f1-4387-b5b1-4ad0953306e2
+	java:S116X"URename this field "m_rootCard" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(â¾Á¹J$43ab67e9-0d76-421d-b680-c31fb941e00a
+‘	java:S116Y"VRename this field "m_childCard" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÙåİïJ$ed3aceb7-22a0-4a37-8cf5-2d641c588fea
+“	java:S116["SRename this field "m_events" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ó¼š¡üÿÿÿÿJ$3b605900-f33c-4663-888d-fea89e6474c7
+Œ	java:S116."QRename this field "m_type" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ôæğ€J$8a5d179d-aa0e-4df0-abe3-03ff7de56cf2
+‘	java:S116/"QRename this field "m_card" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ä‘Ü‘şÿÿÿÿJ$76675eb7-d5db-4bec-9a3a-31ce141a5ed6
+’	java:S1160"RRename this field "m_level" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Û¡ú®úÿÿÿÿJ$c0d1bc30-a690-4cc9-b759-367e46db067d
+Œ	java:S116D"QRename this field "m_type" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ôæğ€J$cb8ba379-6656-431c-8945-ff7b1e1a0f59
+	java:S116E"URename this field "m_category" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯™øJ$66f374c6-8098-4633-bcb4-9775bd3d0a32
+{
+java:S1161`":Add the "@Override" annotation above this method signature(¬ô´¯ıÿÿÿÿJ$26136f62-c29e-4cc3-9bf5-7ce730dc5a27
+o
+java:S1135º"2Complete the task associated to this TODO comment.(°Î½ŒJ$7c382304-2e53-4352-b738-fd208d1554cf

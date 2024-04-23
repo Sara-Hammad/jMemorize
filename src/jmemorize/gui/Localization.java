@@ -23,20 +23,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
+import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import jmemorize.core.Main;
 import jmemorize.core.Settings;
+
+import java.util.logging.Logger;
 
 /**
  * This class is used to query language/locale related strings and date
@@ -50,7 +45,7 @@ public class Localization
     {
         Locale.setDefault(Settings.loadLocale());
     }
-    
+    private static final Logger logger = Logger.getLogger(Localization.class.getName());
     public static final DateFormat SHORT_DATE_FORMATER = 
         DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
     
@@ -65,25 +60,25 @@ public class Localization
     
     private static final String LANGS_FILE = "/resource/text/langs.txt";
     
-    private static Map<?, ?> m_defaultBundle  = getBundleOrNull(Locale.getDefault());
-    private static Map<? ,?> m_fallbackBundle = getBundleOrNull(Locale.ENGLISH);
+    private static Map<?, ?> mDefaultBundle  = getBundleOrNull(Locale.getDefault());
+    private static Map<? ,?> mFallbackBundle = getBundleOrNull(Locale.ENGLISH);
     
     /**
      * Return the string translation that belongs to the key.
      */
     public static String get(String key)
     {
-        if (m_defaultBundle != null)
+        if (mDefaultBundle != null)
         {
-            String val = (String)m_defaultBundle.get(key);
+            String val = (String)mDefaultBundle.get(key);
             
             if (val != null)
                 return val;
         }
         
-        if (m_fallbackBundle != null)
+        if (mFallbackBundle != null)
         {
-            String val = (String)m_fallbackBundle.get(key);
+            String val = (String)mFallbackBundle.get(key);
             return val != null ? val : '!' + key + '!';
         }
         
@@ -96,9 +91,9 @@ public class Localization
      */
     public static String getEmpty(String key)
     {
-        if (m_defaultBundle != null)
+        if (mDefaultBundle != null)
         {
-            String val = (String)m_defaultBundle.get(key);
+            String val = (String)mDefaultBundle.get(key);
             return val != null ? val : "";
         }
         
@@ -113,30 +108,30 @@ public class Localization
      */
     public static String get(String key, String alternateKey)
     {
-        if (m_defaultBundle != null)
+        if (mDefaultBundle != null)
         {
-            String val = (String)m_defaultBundle.get(key);
+            String val = (String)mDefaultBundle.get(key);
             if (val != null)
                 return val;
             
-            val = (String)m_defaultBundle.get(alternateKey);
+            val = (String)mDefaultBundle.get(alternateKey);
             if (val != null)
                 return val;
         }
         
-        if (m_fallbackBundle != null)
+        if (mFallbackBundle != null)
         {
-            String val = (String)m_fallbackBundle.get(key);
+            String val = (String)mFallbackBundle.get(key);
             return val != null ? val : '!' + key + '!';
         }
         
         return '#' + key + '#';
     }
     
-    public static void setBundles(Map defaultBundle, Map fallbackBundle)
+    public static void setBundles(Map<?,?> defaultBundle, Map<?,?>  fallbackBundle)
     {
-        m_fallbackBundle = fallbackBundle;
-        m_defaultBundle = defaultBundle;
+        mFallbackBundle = fallbackBundle;
+        mDefaultBundle = defaultBundle;
     }
     
     /**
@@ -148,15 +143,13 @@ public class Localization
      */
     public static List<Locale> getAvailableLocales()
     {
-        List<Locale> locales = new ArrayList<Locale>();
-        BufferedReader in = null;
+        List<Locale> locales = new ArrayList<>();
 
-        try
-        {
-            // load available locales from file
-            in = new BufferedReader(new InputStreamReader(
-                Localization.class.getResourceAsStream(LANGS_FILE)));
-            Pattern p = Pattern.compile("([a-z]{2})(?:_([A-Z]{2,3}))?"); //$NON-NLS-1$
+        // Variable in was defined here
+
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(
+                Localization.class.getResourceAsStream(LANGS_FILE)))) {
+            Pattern p = Pattern.compile("([a-z]{2})(?:_([A-Z]{2,3}))?");
 
             String line;
             while ((line = in.readLine()) != null)
@@ -168,38 +161,17 @@ public class Localization
                     String language = m.group(1);
                     String country  = m.group(2);
 
-                    locales.add(country != null ? 
-                        new Locale(language, country) : new Locale(language));
+                    locales.add(country != null ? new Locale.Builder().setLanguage(language).setRegion(country).build() : new Locale.Builder().setLanguage(language).build());
                 }
             }
             
             // sort locales by display language
-            Collections.sort(locales, new Comparator<Locale>()
-            {
-                public int compare(Locale l1, Locale l2)
-                {
-                    String ls1 = l1.getDisplayLanguage();
-                    String ls2 = l2.getDisplayLanguage();
-                    
-                    return ls1.compareTo(ls2);
-                }
-            });
+            locales.sort((l1, l2) -> l1.getDisplayLanguage().compareTo(l2.getDisplayLanguage()));
+
         }
         catch (IOException e)
         {
             Main.logThrowable("failed loading available locales", e); //$NON-NLS-1$
-        }
-        finally 
-        {
-            try 
-            {
-                if (in != null)
-                    in.close ();
-            } 
-            catch (IOException e) 
-            {
-                Main.logThrowable("failed loading available locales", e); //$NON-NLS-1$
-            }
         }
         
         return locales;
@@ -224,45 +196,39 @@ public class Localization
         return Locale.ENGLISH;
     }
     
+
     public static void main(String[] args)
     {
         Map<?, ?> defaultBundle = getBundleOrNull(Locale.ENGLISH);
-        
+
         List<Locale> locales = getAvailableLocales();
-        for (Locale locale : locales)
-        {
+
+        for (Locale locale : locales) {
             Map<?, ?> bundle = getBundleOrNull(locale);
             Set<?> bundleKeys = bundle.keySet();
-            
-            List defaultKeys = new ArrayList(defaultBundle.keySet());
+
+            List<?> defaultKeys = new ArrayList<>(defaultBundle.keySet());
             defaultKeys.removeAll(bundleKeys);
-            Collections.sort(defaultKeys);            
-            
-            System.out.print("Locale: "+locale.getLanguage()+ " --> ");
-            if (defaultKeys.isEmpty())
-            {
-                System.out.println("OK");
-            }
-            else
-            {
-                System.out.println(defaultKeys.size() + " missing Keys");
-                for (Iterator it2 = defaultKeys.iterator(); it2.hasNext();)
-                {
-                    String key = (String)it2.next();
-                    System.out.println(key + " = " + defaultBundle.get(key));
+            Collections.sort((List<Comparable<? super Object>>) defaultKeys);
+
+            logger.info("Locale: "+locale.getLanguage()+ " --> ");
+            if (defaultKeys.isEmpty()) {
+                logger.info("No missing keys found.");
+            } else {
+                logger.log(Level.INFO, "{0} missing keys found:", defaultKeys.size());
+
+                for (Object defaultKey : defaultKeys) {
+                    String key = (String) defaultKey;
+                    logger.log(Level.INFO, "{0} = {1}", new Object[]{key, defaultBundle.get(key)});
                 }
-                System.out.println();
             }
-            
-            
-            System.out.println();
         }
     }
     
     /**
      * Tries to load ResourceBundle from given baseName.
-     * 
-     * @param baseName the name of the bundle to load.
+     *
+     * @param locale the name of the bundle to load.
      * @return the ResourceBundle if found. <code>null</code> otherwise.
      */
     private static Properties getBundleOrNull(Locale locale)
@@ -279,7 +245,7 @@ public class Localization
         }
         catch (IOException e)
         {
-            return null;
+            return new Properties();
         }
     }
     

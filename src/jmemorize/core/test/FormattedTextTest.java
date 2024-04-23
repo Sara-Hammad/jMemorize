@@ -97,7 +97,7 @@ public class FormattedTextTest extends TestCase
     
     public void testRemoveRedundantTagsFromEncoding() throws BadLocationException
     {
-        StyledDocument doc = FormattedText.formatted("F<b>oo</b><b>ba</b>r").getDocument();
+        StyledDocument doc = FormattedText.formatted("F<b>oo</b><b>ba</b>r").toStyledDocument();
         assertEquals("F<b>ooba</b>r", FormattedText.formatted(doc).getFormatted());
     }
     
@@ -146,6 +146,6 @@ public class FormattedTextTest extends TestCase
     private static StyledDocument roundtrip(StyledDocument doc)
     {
         String encoding = FormattedText.formatted(doc).getFormatted();
-        return FormattedText.formatted(encoding).getDocument();
+        return FormattedText.formatted(encoding).toStyledDocument();
     }
 }

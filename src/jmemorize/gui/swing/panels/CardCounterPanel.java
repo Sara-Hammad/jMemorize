@@ -1,7 +1,7 @@
 /*
  * jMemorize - Learning made easy (and fun) - A Leitner flashcards tool
  * Copyright(C) 2004-2008 Riad Djemili and contributors
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 1, or (at your option)
@@ -56,7 +56,7 @@ import org.jfree.data.general.PieDataset;
 /**
  * A panel that is used in the learn sidebar and shows how many cards have been
  * learned in the running learn session.
- * 
+ *
  * @author djemili
  */
 public class CardCounterPanel extends JPanel
@@ -72,7 +72,7 @@ public class CardCounterPanel extends JPanel
 
     private LearnSession       m_session;
     private List<Card>         m_cards;
-    
+
     private DefaultPieDataset  m_pieDataset;
     private JProgressBar       m_bar;
     private JTextField         m_textField     = new JTextField();
@@ -82,7 +82,7 @@ public class CardCounterPanel extends JPanel
         if (USE_PARTIAL_BAR)
             attachPartialProgressBar();
     }
-    
+
     public void start(int target)
     {
         m_cardsTarget = target;
@@ -102,34 +102,34 @@ public class CardCounterPanel extends JPanel
     {
         m_cardsPassed = passed;
         m_cardsPartiallyPassed = partiallyPassed;
-        
-        if (partiallyPassed > 0) 
+
+        if (partiallyPassed > 0)
         {
             m_showPartiallyPassed = true;
         }
-        
+
         if (m_cardsTarget > -1)
         {
-            if (USE_PIECHART) 
+            if (USE_PIECHART)
             {
                 int cardsUnlearned = m_cardsTarget - (m_cardsPassed + m_cardsPartiallyPassed);
                 m_pieDataset.setValue(Localization.get(LC.STATUS_LEARNED), m_cardsPassed);
                 m_pieDataset.setValue(Localization.get(LC.STATUS_PARTIAL), m_cardsPartiallyPassed);
-                m_pieDataset.setValue(Localization.get(LC.STATUS_UNLEARNED), cardsUnlearned);    
-            } 
+                m_pieDataset.setValue(Localization.get(LC.STATUS_UNLEARNED), cardsUnlearned);
+            }
             else
             {
                 if (!USE_PARTIAL_BAR)
                     m_bar.setValue(m_cardsPassed);
-                
-                
+
+
                 m_bar.setString(getCardString());
                 m_bar.setForeground(ColorConstants.LEARNED_CARDS.darker());
-                
+
                 if (USE_EXTENT_BAR)
                 {
                     ExtentProgressBar bar = (ExtentProgressBar)m_bar;
-                    bar.setValue(m_cardsPartiallyPassed);                    
+                    bar.setValue(m_cardsPartiallyPassed);
                     bar.setExtent(m_cardsPassed);
                 }
             }
@@ -144,19 +144,19 @@ public class CardCounterPanel extends JPanel
     {
         removeAll();
         setLayout(new BorderLayout());
-        
+
         // if there is a card limit show a progess bar or pie chart
         if (m_cardsTarget > -1)
         {
-            if (USE_PIECHART) 
+            if (USE_PIECHART)
             {
                 m_pieDataset = new DefaultPieDataset();
                 m_pieDataset.setValue(Localization.get(LC.STATUS_LEARNED), 0);
                 m_pieDataset.setValue(Localization.get(LC.STATUS_PARTIAL), 0);
                 m_pieDataset.setValue(Localization.get(LC.STATUS_UNLEARNED) , m_cardsTarget);
-                
-                add(buildPiePanel(), BorderLayout.CENTER);                
-            } 
+
+                add(buildPiePanel(), BorderLayout.CENTER);
+            }
             else
             {
                 if (USE_EXTENT_BAR)
@@ -165,14 +165,14 @@ public class CardCounterPanel extends JPanel
                     m_bar = buildPartialProgressBar();
                 else
                     m_bar = new JProgressBar();
-                
+
                 m_bar.setMaximum(target);
                 m_bar.setMinimum(0);
-                    
+
                 m_bar.setStringPainted(true);
                 m_bar.setString(getCardString());
                 m_bar.setValue(0);
-                
+
                 add(m_bar, BorderLayout.CENTER);
             }
         }
@@ -184,21 +184,21 @@ public class CardCounterPanel extends JPanel
             m_textField.setEditable(false);
             add(m_textField, BorderLayout.CENTER);
         }
-        
+
         setPreferredSize(new Dimension(140, USE_PIECHART ? 140 : 22));
     }
 
     private ChartPanel buildPiePanel()
     {
         JFreeChart chart = ChartFactory.createPieChart(null, m_pieDataset,
-            true, false, false );
-        
+                true, false, false );
+
         setupPiePlot((PiePlot)chart.getPlot());
         setupPieLegend(chart);
-        
+
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setDisplayToolTips(false);
-        
+
         /*
          * RED_FLAG this is a WORKAROUND TO a JFreeChart bug (as of 1.0.4) which
          * causes an affine transform to be applied to charts smaller than
@@ -208,7 +208,7 @@ public class CardCounterPanel extends JPanel
          */
         chartPanel.setMinimumDrawHeight(300);
         chartPanel.setMinimumDrawWidth(300);
-        
+
         return chartPanel;
     }
 
@@ -231,15 +231,15 @@ public class CardCounterPanel extends JPanel
             {
                 return null;
             }
-            
+
             public AttributedString generateAttributedSectionLabel(
-                PieDataset arg0, Comparable arg1)
+                    PieDataset arg0, Comparable arg1)
             {
                 return null;
             }
         });
         //piePlot.setForegroundAlpha(0.5f);
-        
+
         plot.setSectionPaint(Localization.get(LC.STATUS_LEARNED), ColorConstants.LEARNED_CARDS);
         plot.setSectionPaint(Localization.get(LC.STATUS_PARTIAL), ColorConstants.PARTIAL_LEARNED_CARDS);
         plot.setSectionPaint(Localization.get(LC.STATUS_UNLEARNED), ColorConstants.UNLEARNED_CARDS);
@@ -248,16 +248,16 @@ public class CardCounterPanel extends JPanel
     private ExtentProgressBar buildExtentProgressBar()
     {
         ExtentProgressBar bar = new ExtentProgressBar();
-        
+
         bar.setForeground(Color.BLUE);
         Color grn = Color.GREEN.darker();
         Color transparentGreen = new Color(grn.getRed(), grn.getGreen(), grn.getBlue(), 128);
         bar.setExtentForeground(transparentGreen);
         bar.setExtent(0);
-        
+
         return bar;
     }
-    
+
     private float[] getValues()
     {
         float[] vals = new float[m_cards.size()];
@@ -269,27 +269,27 @@ public class CardCounterPanel extends JPanel
         for (int i = 0; i < m_cards.size(); i++)
         {
             Card card = (Card)m_cards.get(i);
-            if (m_session.getPassedCards().contains(card)  || 
-                m_session.getRelearnedCards().contains(card)) 
+            if (m_session.getPassedCards().contains(card)  ||
+                    m_session.getRelearnedCards().contains(card))
             {
                 vals[i] = 1f;
-            } 
-            else 
-            {                        
-                int frontLearnedAmount = card.getLearnedAmount(true); 
-                int backLearnedAmount = card.getLearnedAmount(false);
+            }
+            else
+            {
+                int frontLearnedAmount = card.getFrontSide().getLearnedAmount();
+                int backLearnedAmount = card.getBackSide().getLearnedAmount();
 
                 frontLearnedAmount = Math.min(frontLearnedAmount, frontTargetAmount);
                 backLearnedAmount = Math.min(backLearnedAmount, backTargetAmount);
                 vals[i] = (frontLearnedAmount + backLearnedAmount) / targetAmount;
             }
         }
-        
+
         //Arrays.sort(vals);
-        
+
         return vals;
     }
-    
+
     private void attachPartialProgressBar()
     {
         Main.getInstance().addLearnSessionObserver(new LearnSessionObserver() {
@@ -297,13 +297,13 @@ public class CardCounterPanel extends JPanel
             {
                 public void nextCardFetched(Card nextCard, boolean flippedMode)
                 {
-                    if (m_cards == null) 
+                    if (m_cards == null)
                     {
                         m_cards = new ArrayList<Card>();
                         m_cards.addAll(m_session.getCardsLeft());
                     }
-                    
-                    if (! m_cards.contains(nextCard) ) 
+
+                    if (! m_cards.contains(nextCard) )
                     {
                         // if the new card is not in m_cards, then a card has been skipped and
                         // this card added.  We have to figure out the skipped card
@@ -316,14 +316,14 @@ public class CardCounterPanel extends JPanel
                         m_cards.removeAll(cardsToRemove);
                         m_cards.add(nextCard);
                     }
-                    
+
                     PartialProgressBar bar = (PartialProgressBar)m_bar;
                     bar.setValues(getValues());
                 }
             }
 
             private LearnCardObserver m_obs;
-            
+
             public void sessionEnded(LearnSession session)
             {
                 session.removeObserver(m_obs);
@@ -333,18 +333,18 @@ public class CardCounterPanel extends JPanel
             {
                 m_session = session;
                 m_cards = null;
-                
+
                 m_obs = new LearnCardObs();
                 session.addObserver(m_obs);
             }
         });
     }
-    
+
     private PartialProgressBar buildPartialProgressBar()
     {
         return new PartialProgressBar();
     }
-    
+
     /**
      * @return The string that is used to show the number of cards in progressbar.
      */
@@ -367,11 +367,11 @@ public class CardCounterPanel extends JPanel
         else
         {
             // TODO consider adding lang specific strings 
-            if (m_showPartiallyPassed) 
+            if (m_showPartiallyPassed)
             {
                 return m_cardsPartiallyPassed + " / " + m_cardsPassed;
             }
-            
+
             return Integer.toString(m_cardsPassed);
         }
     }
