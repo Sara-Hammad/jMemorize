@@ -262,7 +262,7 @@ public class Localization
     /**
      * Tries to load ResourceBundle from given baseName.
      * 
-     * @param baseName the name of the bundle to load.
+     * @param //baseName the name of the bundle to load.
      * @return the ResourceBundle if found. <code>null</code> otherwise.
      */
     private static Properties getBundleOrNull(Locale locale)
